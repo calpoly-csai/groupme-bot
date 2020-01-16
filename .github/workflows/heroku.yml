@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy To Heroku
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  build:
-
+  deploy:
+    name: deploy to heroku
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +21,23 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
 
-    - name: Deploy to Heroku
-      uses: AkhileshNS/heroku-deploy@v1.0.0
+    - name: login
+      uses: actions/heroku@1.0.0
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "calpoly-csai-groupme-bot"
-        heroku_email: ${{secrets.HEROKU_EMAIL}}
+        args: container:login
+
+    - name: push
+      uses: actions/heroku@1.0.0
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:push -a calpoly-csai-groupme-bot web
+
+    - name: release
+      uses: actions/heroku@1.0.0
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:release -a calpoly-csai-groupme-bot web
