@@ -26,4 +26,4 @@ jobs:
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "calpoly-csai-groupme-bot"
-        heroku_email: "mike.fekadu@gmail.com"
+        heroku_email: ${{secrets.HEROKU_EMAIL}}
