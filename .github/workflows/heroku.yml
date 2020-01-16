@@ -22,21 +22,21 @@ jobs:
         echo test, and deploy your project.
 
     - name: login
-      uses: actions/heroku@1.0.0
+      uses: actions/heroku@master
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
         args: container:login
 
     - name: push
-      uses: actions/heroku@1.0.0
+      uses: actions/heroku@master
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
         args: container:push -a calpoly-csai-groupme-bot web
 
     - name: release
-      uses: actions/heroku@1.0.0
+      uses: actions/heroku@master
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
