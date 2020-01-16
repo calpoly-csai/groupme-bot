@@ -24,7 +24,7 @@ def got_new_message():
     print("got a message!")
     find_latest_message()
     post_a_message()
-    return msg
+    return "done"
 
 
 if __name__ == "__main__":
