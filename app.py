@@ -20,17 +20,10 @@ def find_latest_message():
 
 
 @app.route("/new-groupme-message")
-def get_new_message():
+def got_new_message():
     print("got a message!")
     find_latest_message()
     post_a_message()
-    # will remove this code on next commit, just curious to see
-    msg = "{}\n{}\n{}\n{}".format(
-        config.GROUPME_ACCESS_TOKEN,
-        config.GROUPME_CALLBACK_URL,
-        config.GROUPME_CLIENT_ID,
-        config.GROUPME_REDIRECT_URL
-    )
     return msg
 
 
