@@ -14,9 +14,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Run a one-line script
-      env:
-        HEROKU_EMAIl: ${{ secrets.HEROKU_EMAIL }}
-      run: echo Hello, world! $HEROKU_EMAIL
+      run: echo Hello, world!
 
     - name: Run a multi-line script
       run: |
