@@ -14,7 +14,7 @@ It could do much more too, just be creative!
 - [x] ~Create a [GroupMe Bot][1] that can simply **read** the latest message~
   * key results in [this REST endpoint][3] and [this other REST endpoint][4]
 
-- [ ] Add code for a [Slack-Bot][2] that can **post** new messages
+- [x] Add code for a [Slack-Bot][2] that can **post** new messages
 
 ### GroupMe-Bot can _____ (do whatever you want)
 - [ ] What code needs to be done for GroupMe-Bot to do what you want?

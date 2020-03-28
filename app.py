@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 
 import config
+import json
 import requests
 
 app = Flask(__name__)
@@ -14,7 +15,6 @@ def hello():
 @app.route("/post-groupme-message")
 def post_a_message():
     pass
-
 
 def make_get_messages_by_group_id_url_params():
     """Make the API URL"""
@@ -36,6 +36,34 @@ def find_latest_message():
     return response_body.get('response', {}).get('messages', [None])[0]
 
 
+@app.route("/test-slack")
+def send_to_slack(text="hello world"):
+    '''
+    POST https://slack.com/api/chat.postMessage
+    Content-type: application/json
+    Authorization: Bearer YOUR_TOKEN_HERE
+    {
+        "channel": "YOUR_CHANNEL_ID",
+        "text": "Hello, world"
+    }
+    '''
+
+    URL = "https://slack.com/api/chat.postMessage"
+ 
+    message = {
+                "channel": config.SLACK_GENERAL_CHANNEL_ID,
+                "text": text
+              }
+    
+    headers = {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + config.SLACK_ACCESS_TOKEN
+              }
+    
+    requests.post(URL, data=json.dumps(message), headers=headers)
+    
+    return "SUCCESS", 200
+
 @app.route("/get-latest-message-object/", methods=['GET'])
 def get_latest_message_object():
     latest_message = find_latest_message()
@@ -55,6 +83,7 @@ def got_new_message():
 
     if latest_message is not None and type(latest_message) == dict:
         latest_message_text = latest_message.get("text", None)
+        send_to_slack(latest_message_text)
 
     if latest_message_text is not None:
         return latest_message_text, 200
