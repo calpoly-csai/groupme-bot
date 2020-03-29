@@ -6,6 +6,9 @@ import requests
 
 app = Flask(__name__)
 
+# to allow all methods
+HTTP_METHODS = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH']
+
 
 @app.route("/")
 def hello():
@@ -75,7 +78,7 @@ def get_latest_message_object():
         return "latest_message is unexpected... oops", 201
 
 
-@app.route("/new-groupme-message")
+@app.route("/new-groupme-message", methods=HTTP_METHODS)
 def got_new_message():
     print("got a message!")
 
