@@ -98,6 +98,16 @@ def got_new_message():
     else:
         return "latest_message_text is None... oops", 201
 
+def cute_pics(message):
+    if "@csaibot" in message[0:8]:
+        if "cat" in message:
+            return "https://66.media.tumblr.com/tumblr_lta61d2BgL1r4ghkoo1_500.gifv"
+        elif "dog" in message:
+            return "https://data.whicdn.com/images/116913623/original.gif"
+        else:
+            return "https://i.kym-cdn.com/photos/images/original/001/743/050/b3f.jpeg"
+    else: #when @csaibot is not in the message
+        return "format: @csaibot <message>"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=config.PORT, debug=config.DEBUG_MODE)
