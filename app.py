@@ -83,10 +83,15 @@ def got_new_message():
 
     if latest_message is not None and type(latest_message) == dict:
         latest_message_text = latest_message.get("text", None)
-        send_to_slack(latest_message_text)
+        latest_message_sender = latest_message.get("name", None)
+
+        slack_message =  "%s: %s" % \
+                            (latest_message_sender, latest_message_text)
+
+        send_to_slack(slack_message)
 
     if latest_message_text is not None:
-        return latest_message_text, 200
+        return slack_message, 200
     else:
         return "latest_message_text is None... oops", 201
 
